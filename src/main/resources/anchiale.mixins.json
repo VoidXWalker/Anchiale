@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "me.voidxwalker.anchiale.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "IntegratedServerMixin",
+    "PlayerManagerMixin"
+
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "anchiale",
+  "version": "${version}",
+  "name": "Anchiale",
+  "description": "",
+  "authors": [
+    "RedLime"
+  ],
+  "license": "MIT",
+  "environment": "*",
+
+  "mixins": [
+    "anchiale.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.12.12",
+    "minecraft": "1.8.9"
+  }
+}
