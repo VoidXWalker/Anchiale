@@ -13,6 +13,7 @@
   "mixins": [
     "anchiale.mixins.json"
   ],
+  "accessWidener": "anchiale.accesswidener",
   "depends": {
     "fabricloader": ">=0.12.12",
     "minecraft": "1.8.9"
