@@ -3,6 +3,7 @@ package me.voidxwalker.anchiale.mixin;
 import com.google.common.collect.Lists;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import me.voidxwalker.anchiale.Anchiale;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.integrated.IntegratedServer;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -28,15 +29,23 @@ public abstract class IntegratedServerMixin<V> extends MinecraftServer {
 
     @Redirect(method = "stopRunning", at = @At(value = "INVOKE", target = "Lcom/google/common/util/concurrent/Futures;getUnchecked(Ljava/util/concurrent/Future;)Ljava/lang/Object;"))
     public V e(Future<V> e){
-        List<ServerPlayerEntity> list = Lists.newArrayList((Iterable)this.getPlayerManager().getPlayers());
-        Iterator iterator = list.iterator();
+        if (Anchiale.fastReset) {
+            Anchiale.LOGGER.info("Exiting world without waiting for server tasks to finish.");
+            return null;
+        } else {
+            Anchiale.LOGGER.info("Exiting world normally.");
+            Futures.getUnchecked(this.execute(new Runnable() {
+                public void run() {
+                    List<ServerPlayerEntity> list = Lists.newArrayList((Iterable)IntegratedServerMixin.this.getPlayerManager().getPlayers());
+                    Iterator iterator = list.iterator();
 
-        while(iterator.hasNext()) {
-            ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity)iterator.next();
-            this.getPlayerManager().remove(serverPlayerEntity);
+                    while(iterator.hasNext()) {
+                        ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity)iterator.next();
+                        IntegratedServerMixin.this.getPlayerManager().remove(serverPlayerEntity);
+                    }
+                }
+            }));
         }
         return null;
     }
-
-
 }

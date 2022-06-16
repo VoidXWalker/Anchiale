@@ -5,9 +5,7 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "IntegratedServerMixin",
-    "PlayerManagerMixin",
-    "PlayerInstanceMixin"
-
+    "GameMenuScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
