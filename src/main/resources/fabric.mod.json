@@ -4,12 +4,19 @@
   "version": "${version}",
   "name": "Anchiale",
   "description": "",
+  "entrypoints": {
+    "client": [
+      "me.voidxwalker.anchiale.Anchiale"
+    ]
+  },
   "authors": [
-    "RedLime"
+    "RedLime?",
+    "voidxwalker",
+    "Gregor",
+    "pixfumy"
   ],
   "license": "MIT",
   "environment": "*",
-
   "mixins": [
     "anchiale.mixins.json"
   ],
